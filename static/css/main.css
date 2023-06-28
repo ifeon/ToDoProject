@@ -1,0 +1,19 @@
+.navbar-brand img {
+    width: 90px;
+}
+
+.navbar .container-fluid {
+    background-color: white;
+}
+
+.back{
+    background-image: url("../img/todolist.jpg");
+    background-repeat: no-repeat;
+    background-position: center;
+    background-size: cover;
+
+}
+
+.navbar-collapse {
+    flex-grow: 0;
+}

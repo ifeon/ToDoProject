@@ -1,0 +1,26 @@
+{% extends 'base.html' %}
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+{% block content %}
+    <form class="position-absolute top-50 start-50 translate-middle" method="post">
+    {% csrf_token %}
+    <div class="mb-3">
+        <label for="exampleInputName" class="form-label">Username</label>
+        <input type="text" class="form-control" name=username id="exampleInputName">
+    </div>
+    <div class="mb-3">
+        <label for="exampleInputPassword1" class="form-label">Password</label>
+        <input type="password" class="form-control" name=password id="exampleInputPassword1">
+    </div>
+        {{ form.errors }}
+    <button type="submit" class="btn btn-primary">Sign in</button>
+</form>
+{% endblock content %}
+</body>
+</html>

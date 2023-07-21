@@ -30,4 +30,5 @@ class RegView(CreateView):
 
 
 def profile(request):
+    """User profile"""
     return render(request, 'profile.html')

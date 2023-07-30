@@ -1,0 +1,17 @@
+{% extends 'tasks.html' %}
+{% load static %}
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>task done</title>
+</head>
+<body>
+    {% block content %}
+        {% for task in taskdone %}
+                <li>{{ task }}</li>
+            {% endfor %}
+    {% endblock content %}
+</body>
+</html>

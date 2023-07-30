@@ -1,0 +1,63 @@
+{% load static %}
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>tasks</title>
+    <link rel="stylesheet" href="{% static 'css/tasks.css' %}">
+</head>
+<body>
+    <div class="header">
+        <div class="head-button">
+            <a href="{% url 'main:profile' %}">TODO</a>
+            <a href="{% url 'main:task_done' %}">DONE</a>
+            <div class="dropdown">
+                <div class="user-button">
+                    {{ user }}
+                    <div class="user-dropdown">
+                        <a href="{% url 'logout' %}">Logout</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="container">
+        <ol>
+        {% block content %}
+            {% for task in tasks %}
+                <li>{{ task }}</li>
+            {% endfor %}
+        {% endblock content %}
+        </ol>
+        <div class="add-task">
+            <a class="" href="#"><img src="{% static 'img/add_task.png' %}" style="width:80px; " alt=""></a>
+        </div>
+    </div>
+</body>
+
+
+
+
+{#<!DOCTYPE html>#}
+{#<html lang="en">#}
+{#<head>#}
+{#    <meta charset="UTF-8">#}
+{#    <title>profile</title>#}
+{#</head>#}
+{#<body>#}
+{#    <h1>#}
+{#        {{ user.username }}#}
+{#    </h1>#}
+{#    <button class="" onclick="location.href='{% url 'logout' %}'">logout</button>#}
+{#    <h2>#}
+{#        {% for task in user.tasks.all %}#}
+{#            <h3>#}
+{#                <a href="{% url 'main:task_detail' task.id %}">#}
+{#                {{ task.title }}#}
+{#                </a>#}
+{#            </h3>#}
+{#        {% endfor %}#}
+{#    </h2>#}
+{#</body>#}
+{#</html>#}

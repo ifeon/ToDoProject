@@ -1,5 +1,5 @@
 from django.contrib.auth.models import User
-from django.shortcuts import render
+from django.shortcuts import render, get_object_or_404
 from django.http import HttpResponse
 from django.shortcuts import render
 from django.contrib.auth import authenticate, login
@@ -7,6 +7,7 @@ from django.urls import reverse_lazy
 from django.views.generic import CreateView
 
 from main.forms import CustomUserCreationForm
+from main.models import Task
 
 
 def main(request):
@@ -30,5 +31,16 @@ class RegView(CreateView):
 
 
 def profile(request):
-    """User profile"""
-    return render(request, 'profile.html')
+    """User tasks"""
+    tasks = Task.objects.filter(completed=False, username=request.user)
+    return render(request, 'tasks.html', {'tasks': tasks})
+
+
+def task_done(request):
+    taskdone = Task.objects.filter(completed=True, username=request.user)
+    return render(request, 'tasks_done.html', {'taskdone': taskdone})
+
+
+def task_detail(request, id):
+    task = Task.objects.get(id=id)
+    return render(request, 'task_detail.html', {'task': task})

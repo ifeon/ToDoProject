@@ -10,8 +10,7 @@
 <body>
     {% block content %}
         {% for task in taskdone %}
-                <li>{{ task }}</li>
+                <li class="task-list">{{ task }}</li>
             {% endfor %}
     {% endblock content %}
 </body>
-</html>

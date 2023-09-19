@@ -1,12 +1,8 @@
-from django.contrib.auth.models import User
-from django.shortcuts import render, get_object_or_404
-from django.http import HttpResponse
-from django.shortcuts import render
-from django.contrib.auth import authenticate, login
+from django.shortcuts import render, redirect, get_object_or_404
 from django.urls import reverse_lazy
 from django.views.generic import CreateView
 
-from main.forms import CustomUserCreationForm
+from main.forms import CustomUserCreationForm, TaskCreationForm
 from main.models import Task
 
 
@@ -15,7 +11,7 @@ def main(request):
     return render(request, 'base.html')
 
 
-def login(request):
+def user_login(request):
     return render(request, 'registration/login.html')
 
 
@@ -42,5 +38,21 @@ def task_done(request):
 
 
 def task_detail(request, id):
-    task = Task.objects.get(id=id)
+    task = get_object_or_404(Task,
+                             id=id)
     return render(request, 'task_detail.html', {'task': task})
+
+
+def task_create(request):
+    if request.method == 'POST':
+        form = TaskCreationForm(request.POST)
+        if form.is_valid():
+            task = form.save(commit=False)
+            task.username = request.user
+            task.save()
+            return redirect('main:profile')
+    form = TaskCreationForm
+    context = {
+        'form': form,
+    }
+    return render(request, 'add_task.html', context)

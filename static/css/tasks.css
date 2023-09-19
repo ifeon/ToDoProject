@@ -1,14 +1,17 @@
 html {
     box-sizing: border-box;
+    text-decoration: none;
 }
 *, *::before, *::after {
     box-sizing: inherit;
+    text-decoration: none;
 }
 
 body {
     margin: 0;
     font-family: Jost, sans-serif;
     background-color: #b2bac2;
+    text-decoration: none;
 }
 
 
@@ -77,10 +80,9 @@ body {
 
 .container ol {
     padding: 11px;
-
 }
 
-.container li{
+.container .task-list{
     height: 82px;
     background: #a69e9e;
     display: flex;
@@ -95,4 +97,9 @@ body {
     line-height: normal;
     margin: 10px;
     box-shadow: 0px 4px 4px 0px rgba(56, 35, 35, 0.25);
+}
+
+.add-task-form{
+    display: flex;
+    justify-content: center;
 }

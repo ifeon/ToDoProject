@@ -1,3 +1,5 @@
+{% extends 'tasks.html' %}
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -5,9 +7,8 @@
     <title>detail</title>
 </head>
 <body>
-    <h1>
-        {{ user.tasks }}
-    </h1>
-
+    {% block content %}
+        <h1>{{ task.title }}</h1>
+        {{ task.detail }}
+    {% endblock content %}
 </body>
-</html>

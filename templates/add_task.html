@@ -1,0 +1,28 @@
+{% extends 'tasks.html' %}
+{% load static %}
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <link rel="stylesheet" href="{% static 'css/tasks.css' %}">
+</head>
+<body>
+    {% block content %}
+        <div class="container">
+            <form class="add-task-form" method="post">
+                {% csrf_token %}
+                <div class="task-list">
+                    <label>Title
+                        <input type="text" class="form-control" name=title>
+                    </label>
+                    <label>Detail
+                        <textarea name=detail cols="30" rows="5" placeholder="not necessary"></textarea>
+                    </label>
+                    <input type="submit" name=add_task value="add task">
+                </div>
+            </form>
+        </div>
+    {% endblock content %}
+</body>

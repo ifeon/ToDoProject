@@ -14,8 +14,6 @@ body {
     text-decoration: none;
 }
 
-
-
 .header {
     width: 100%;
     height: 10vh;
@@ -102,4 +100,14 @@ body {
 .add-task-form{
     display: flex;
     justify-content: center;
+}
+
+.paginator{
+    font-size: 24px;
+    font-weight: 200;
+
+}
+
+.active {
+    text-decoration: underline
 }

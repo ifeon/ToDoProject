@@ -10,8 +10,10 @@
 <body>
     <div class="header">
         <div class="head-button">
-            <a href="{% url 'main:profile' %}">TODO</a>
-            <a href="{% url 'main:task_done' %}">DONE</a>
+            {% url 'main:profile' as url %}
+            <a href="{{ url }}" {% if request.path == url %}class="active"{% endif %}>TODO</a>
+            {% url 'main:task_done' as url %}
+            <a href="{{ url }}" {% if request.path == url %}class="active"{% endif %}>DONE</a>
             <div class="dropdown">
                 <div class="user-button">
                     {{ user }}
@@ -25,13 +27,25 @@
     <div class="container">
         <ol>
         {% block content %}
-            {% for task in tasks %}
+            <div class="paginator">
+            {% for task in current_page.object_list %}
                 <li class="task-list"><a href="{% url 'main:task_detail' task.id %}">{{ task }}</a></li>
             {% endfor %}
-        {% endblock content %}
+            {% if current_page.has_previous %}
+                <a href="?page={{ current_page.previous_page_number }}">Previous</a>
+            {% endif %}
+             <span class="page-current">
+                Page {{ current_page.number }} of {{ current_page.paginator.num_pages }}.
+             </span>
+            {% if current_page.has_next %}
+                <a href="?page={{ current_page.next_page_number }}">Next</a>
+            {% endif %}
+            </div>
         </ol>
-        <div class="add-task">
-            <a class="" href="{% url 'main:add_task' %}"><img src="{% static 'img/add_task.png' %}" style="width:80px; " alt=""></a>
-        </div>
+            <div class="add-task">
+                <a href="{% url 'main:add_task' %}">
+                    <img src="{% static 'img/add_task.png' %}" style="width:80px; " alt=""></a>
+            </div>
+        {% endblock content %}
     </div>
 </body>

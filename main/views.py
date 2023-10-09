@@ -1,3 +1,4 @@
+from django.core.paginator import Paginator
 from django.shortcuts import render, redirect, get_object_or_404
 from django.urls import reverse_lazy
 from django.views.generic import CreateView
@@ -28,18 +29,32 @@ class RegView(CreateView):
 
 def profile(request):
     """User tasks"""
-    tasks = Task.objects.filter(completed=False, username=request.user)
-    return render(request, 'tasks.html', {'tasks': tasks})
+    tasks = Task.objects.filter(completed=False, username=request.user).order_by('-created')
+    paginator = Paginator(tasks, 7)
+    page_number = request.GET.get('page')
+    current_page = paginator.get_page(page_number)
+    content = {
+        'tasks': tasks,
+        'current_page': current_page
+    }
+    return render(request, 'tasks.html', content)
 
 
 def task_done(request):
     taskdone = Task.objects.filter(completed=True, username=request.user)
-    return render(request, 'tasks_done.html', {'taskdone': taskdone})
+    paginator = Paginator(taskdone, 7)
+    page_number = request.GET.get('page')
+    current_page = paginator.get_page(page_number)
+    content = {
+        'tasks': taskdone,
+        'current_page': current_page
+    }
+    return render(request, 'tasks_done.html', content)
 
 
-def task_detail(request, id):
+def task_detail(request, task_id):
     task = get_object_or_404(Task,
-                             id=id)
+                             id=task_id)
     return render(request, 'task_detail.html', {'task': task})
 
 

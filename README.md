@@ -1,2 +1,2 @@
 # ToDoProject
-My first web project.
+Fullstack todo list project
